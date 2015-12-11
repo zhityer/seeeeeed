@@ -1,4 +1,3 @@
-
 local function pre_process(msg)
   -- SERVICE MESSAGE
   if msg.action and msg.action.type then
@@ -40,8 +39,13 @@ local function pre_process(msg)
           end
         end
       end
+      local bots_protection = "Yes"
+      local data = load_data(_config.moderation.data)
+      if data[tostring(msg.to.id)]['settings']['lock_bots'] then
+        bots_protection = data[tostring(msg.to.id)]['settings']['lock_bots']
+      end
     if msg.action.user.username ~= nil then
-      if string.sub(msg.action.user.username:lower(), -3) == 'bot' and not is_momod(msg) then --- Will kick bots added by normal users
+      if string.sub(msg.action.user.username:lower(), -3) == 'bot' and not is_momod(msg) and bots_protection == "yes" then --- Will kick bots added by normal users
         local name = user_print_name(msg.from)
           savelog(msg.to.id, name.." ["..msg.from.id.."] added a bot > @".. msg.action.user.username)-- Save to logs
           kick_user(msg.action.user.id, msg.to.id)
@@ -114,15 +118,18 @@ local function username_id(cb_extra, success, result)
   return send_large_msg(receiver, text)
 end
 local function run(msg, matches)
-  if matches[1]:lower() == 'id' then
+ if matches[1]:lower() == 'id' then
+    if msg.to.type == "user" then
+      return "Bot ID: "..msg.to.id.. "\n\nYour ID: "..msg.from.id
+    end
     if type(msg.reply_id) ~= "nil" then
       local name = user_print_name(msg.from)
         savelog(msg.to.id, name.." ["..msg.from.id.."] used /id ")
       id = get_message(msg.reply_id,get_message_callback_id, false)
-    else
+    elseif matches[1]:lower() == 'id' then
       local name = user_print_name(msg.from)
       savelog(msg.to.id, name.." ["..msg.from.id.."] used /id ")
-      return "group id : "..msg.to.id  
+      return "Group ID for " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id  
     end
   end
   local receiver = get_receiver(msg)
@@ -175,7 +182,7 @@ local function run(msg, matches)
         savelog(msg.to.id, name.." ["..msg.from.id.."] baned user ".. matches[2])
         chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
       end
-    return 'User '..user_id..' banned'
+    return 
     end
   end
   if matches[1]:lower() == 'unban' then -- /unban 
@@ -242,6 +249,9 @@ local function run(msg, matches)
   end
 
   if matches[1]:lower() == 'banall' then -- Global ban
+    if type(msg.reply_id) ~="nil" and is_admin(msg) then
+      return get_message(msg.reply_id,banall_by_reply, false)
+    end
     local user_id = matches[2]
     local chat_id = msg.to.id
     if msg.to.type == 'chat' then
@@ -284,6 +294,7 @@ end
 return {
   patterns = {
     "^[!/]([Bb]anall) (.*)$",
+    "^[!/]([Bb]anall)$",
     "^[!/]([Bb]anlist) (.*)$",
     "^[!/]([Bb]anlist)$",
     "^[!/]([Gg]banlist)$",
@@ -291,6 +302,7 @@ return {
     "^[!/]([Kk]ick)$",
     "^[!/]([Uu]nban) (.*)$",
     "^[!/]([Uu]nbanall) (.*)$",
+    "^[!/]([Uu]nbanall)$",
     "^[!/]([Kk]ick) (.*)$",
     "^[!/]([Kk]ickme)$",
     "^[!/]([Bb]an)$",
