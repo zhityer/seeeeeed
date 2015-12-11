@@ -221,133 +221,84 @@ function create_config( )
     },
     sudo_users = {128231895,0,tonumber(our_id)},--Sudo users
     disabled_channels = {},
-    realm = {},--Realms Id
+    realm = {52039033},--Realms Id
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Teleseed v1
-An advance Administration bot based on yagop/telegram-bot 
-
-https://github.com/SEEDTEAM/TeleSeed
-
-Admins
-@iwals [Founder]
-@imandaneshi [Developer]
-@seyedan25 [Manager]
-
-Special thanks to
-awkward_potato
-Siyanew
-topkecleon
-Vamptacus
-
-Our channels
-@teleseedch [English]
-]],
+    about_text = [[PoliceSD
+    ضداسپم فارسی برپایه سید
+برای خرید گروه ضداسپم با ایدی های زیر تماس بگیرید
+@policetg_admin
+ @police_admin
+ ]],
     help_text = [[
-Commands list :
+لیست دستورات 
 
-!kick [username|id]
-You can also do it by reply
+!kick [username|id] : اخراج کاربر با ایدی و ریپلی
 
-!ban [ username|id]
-You can also do it by reply
+!ban [ username|id] : بن کاربر با ایدی و ریپلی
 
-!unban [id]
-You can also do it by reply
+!unban [id] : حذف بن کاربر با ایدی و ریپلی
 
-!who
-Members list
+!who : لیست اعضا
 
-!modlist
-Moderators list
+!modlist : لیست مدیران
 
-!promote [username]
-Promote someone
+!promote [username] : ادمین کردن کاربر
 
-!demote [username]
-Demote someone
+!demote [username] : حذف ادمین
 
-!kickme
-Will kick user
+!kickme : حذف شما از گروه
 
-!about
-Group description
+!about : توضیحات گروه
 
-!setphoto
-Set and locks group photo
+!setphoto : تغییر عکس گروه
 
-!setname [name]
-Set group name
+!setname [name] : تغییر نام گروه
 
-!rules
-Group rules
+!rules : قوانین گروه
 
-!id
-return group id or user id
+!id : ایدی گروه و کاربر
 
 !help
 
-!lock [member|name]
-Locks [member|name] 
+!lock [member|name|bots] : قفل آیتم های گروه
 
-!unlock [member|name|photo]
-Unlocks [member|name|photo]
+!unlock [member|name|photo|bots] : غیرفعال کردن قفل ها
 
-!set rules <text>
-Set <text> as rules
+!set rules <text> : ایجاد قوانین برای گروه
 
-!set about <text>
-Set <text> as about
+!set about <text> : ایجاد توضیحات برای گروه
 
-!settings
-Returns group settings
+!settings : نمایش تنظیمات گروه
 
-!newlink
-create/revoke your group link
+!newlink : لینک جدید برای گروه
 
-!link
-returns group link
+!link : لنمایش لینک فعلی گروه
 
-!owner
-returns group owner id
+!owner : نمایش ایدی مالک گروه
 
-!setowner [id]
-Will set id as owner
+!setowner [id] : تعیین مالک برای گروه
 
-!setflood [value]
-Set [value] as flood sensitivity
+!setflood [number] : تعیین حساسیت ضداسپم خودکار
 
-!stats
-Simple message statistics
+!stats : جزئیات کامل گروه
 
-!save [value] <text>
-Save <text> as [value]
+!save [name] <text> : ذخیره متن با یک عنوان
 
-!get [value]
-Returns text of [value]
+!get [name] : نمایش متن یک عنوان
 
-!clean [modlist|rules|about]
-Will clear [modlist|rules|about] and set it to nil
+!clean [modlist|rules|about] : پاک کردن مدیران، قوانین یا توضیحات گروه
 
-!res [username]
-returns user id
-"!res @username"
+!res @[username] : نمایش ایدی یک یوزرنیم
 
-!log
-will return group logs
+!log : اتفاقات گروه به تفکیک زمان
 
-!banlist
-will return group ban list
+!banlist : لیست بن شدگان گروه
 
-**U can use both "/" and "!" 
+"/" or "!" 
 
+*فقط ادمین ها می توانند ربات به گروه اضافه کنند
 
-*Only owner and mods can add bots in group
-
-
-*Only moderators and owner can use kick,ban,unban,newlink,link,setphoto,setname,lock,unlock,set rules,set about and settings commands
-
-*Only owner can use res,setowner,promote,demote and log commands
-
+*فقط ادمین ها می توانند تنظیمات گروه را تغییر دهند یا کاربران را اخراج و بن کنند
 ]]
 
   }
