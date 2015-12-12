@@ -218,6 +218,7 @@ function create_config( )
     "broadcast",
     "download_media",
     "invite"
+    "all"
     },
     sudo_users = {128231895,0,tonumber(our_id)},--Sudo users
     disabled_channels = {},
@@ -234,7 +235,7 @@ function create_config( )
 
 !kick [username|id] : اخراج کاربر با ایدی و ریپلی
 
-!ban [ username|id] : بن کاربر با ایدی و ریپلی
+!ban [username|id] : بن کاربر با ایدی و ریپلی
 
 !unban [id] : حذف بن کاربر با ایدی و ریپلی
 
@@ -266,7 +267,7 @@ function create_config( )
 
 !set about <text> : ایجاد توضیحات برای گروه
 
-!settings : نمایش تنظیمات گروه
+!settings/!all : نمایش تنظیمات و مشخصات گروه
 
 !newlink : لینک جدید برای گروه
 
